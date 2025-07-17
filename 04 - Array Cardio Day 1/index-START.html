@@ -38,29 +38,62 @@
     
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    const bornInThe1500s = inventors.filter((inventor) => 
+    (inventor.year >= 1500 && inventor.year < 1600))
 
+    console.log(bornInThe1500s) 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+    const inventorsNames = inventors.map((inventor) => 
+    (inventor.first + " " + inventor.last))
 
+    console.log(inventorsNames)
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    const sorted = inventors.sort((inventorA, inventorB) => 
+    (inventorB.year - inventorA.year))
 
+    console.log(sorted)
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
+    const lived = inventors.reduce((acc, inventor) => 
+    (acc + (inventor.passed - inventor.year)), 0)
 
+    console.log(`Lived ${lived} years`)
     // 5. Sort the inventors by years lived
+    const sortedByLived = inventors.sort((inventorA, inventorB) => {
+      let livedA = inventorA.passed - inventorA.year
+      let livedB = inventorB.passed - inventorB.year
+      return livedA - livedB
+    })
 
+    console.table(sortedByLived)
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    const sortedByLastName = people.sort((personA, personB) => {
+      let personANames = personA.split(",")
+      let personBNames = personB.split(",")
+      return personANames[0] > personBNames[0] ? 1 : -1
+    })
 
+    console.log(sortedByLastName)
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
 
+    const dataCount = data.reduce((count, transport) => {
+      if(!count[transport]) {
+        count[transport] = 0
+      }
+      count[transport]++
+      return count
+    }, {})
+
+    console.table(dataCount)
   </script>
 </body>
 </html>
